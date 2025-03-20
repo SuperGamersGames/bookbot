@@ -20,14 +20,17 @@ def get_book_text(filepath):
 
 def main():
     args = sys.argv
+    error = f"{bcolors.FAIL}{bcolors.BOLD}Error:{bcolors.ENDC}{bcolors.FAIL}"
+    usage = f"{bcolors.WARNING}{bcolors.BOLD}Usage:{bcolors.ENDC}{bcolors.WARNING}"
+
     if len(args) != 2:
-        print(f"{bcolors.FAIL}{bcolors.BOLD}Error:{bcolors.ENDC}{bcolors.FAIL} args has {len(args)} but was expecting 2.{bcolors.ENDC}\nUsage: python3 main.py <path_to_book>")
+        print(f"{error} Missing Argument. Expected args to be 2 but instead received {len(args)}{bcolors.ENDC}\n{usage} python3 main.py <path_to_book>")
         sys.exit(1)
     
     filepath = args[1]
     
     if not os.path.exists(filepath):
-        print(f"{bcolors.FAIL}{bcolors.BOLD}Error:{bcolors.ENDC}{bcolors.FAIL} Invalid Argument. Please ensure <path_to_book> exists.{bcolors.ENDC}\nUsage: python3 main.py <path_to_book>")
+        print(f"{error} Invalid Argument. \"{filepath}\" is not a valid filepath.{bcolors.ENDC}\n{usage} python3 main.py <path_to_book>")
         sys.exit(2)
     
     print(f"\n============ BOOKBOT ============")
