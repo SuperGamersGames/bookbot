@@ -1,12 +1,36 @@
+import os
+import sys
 from stats import get_word_count,get_char_count,sort_char_count
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def get_book_text(filepath):
     # Return text in file as a string 
     with open(filepath) as f:
         return f.read()
 
-def main(filepath):
-    print(f"============ BOOKBOT ============")
+def main():
+    args = sys.argv
+    if len(args) != 2:
+        print(f"{bcolors.FAIL}{bcolors.BOLD}Error:{bcolors.ENDC}{bcolors.FAIL} args has {len(args)} but was expecting 2.{bcolors.ENDC}\nUsage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    filepath = args[1]
+    
+    if not os.path.exists(filepath):
+        print(f"{bcolors.FAIL}{bcolors.BOLD}Error:{bcolors.ENDC}{bcolors.FAIL} Invalid Argument. Please ensure <path_to_book> exists.{bcolors.ENDC}\nUsage: python3 main.py <path_to_book>")
+        sys.exit(2)
+    
+    print(f"\n============ BOOKBOT ============")
 
     book_text = get_book_text(filepath)
     print(f"Analyzing book found at {filepath}...")
@@ -22,6 +46,6 @@ def main(filepath):
         if index["char"].isalpha():
             print(f"{index["char"]}: {index["count"]}")
 
-    print(f"============= END ===============")
+    print(f"============= END ===============\n")
 
-main("books/frankenstein.txt") # Run Program
+main() # Run Program
