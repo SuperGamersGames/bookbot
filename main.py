@@ -1,4 +1,4 @@
-from stats import get_num_words
+from stats import get_word_count
 
 def get_book_text(filepath):
     # Return text in file as a string 
